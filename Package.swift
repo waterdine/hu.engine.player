@@ -39,9 +39,9 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "虎.engine.base", url: "https://github.com/waterdine/hu.engine.base.git", .branch("main")),
-        .package(name: "虎.engine.story", url: "https://github.com/waterdine/hu.engine.story.git", .branch("main")),
-        .package(name: "虎.engine.puzzle", url: "https://github.com/waterdine/hu.engine.puzzle.git", .branch("main"))
+        .package(name: "虎.engine.base", url: "https://github.com/waterdine/hu.engine.base.git", .upToNextMajor(from: "0.0.1")),
+        .package(name: "虎.engine.story", url: "https://github.com/waterdine/hu.engine.story.git", .upToNextMajor(from: "0.0.1")),
+        .package(name: "虎.engine.puzzle", url: "https://github.com/waterdine/hu.engine.puzzle.git", .upToNextMajor(from: "0.0.1"))
     ],
     targets: [
         .executableTarget(
