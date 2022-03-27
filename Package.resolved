@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "虎.engine.base",
+        "repositoryURL": "https://github.com/waterdine/hu.engine.base.git",
+        "state": {
+          "branch": "main",
+          "revision": "d43909853898de2313c347f8058a72dd611248fe",
+          "version": null
+        }
+      },
+      {
+        "package": "虎.engine.puzzle",
+        "repositoryURL": "https://github.com/waterdine/hu.engine.puzzle.git",
+        "state": {
+          "branch": "main",
+          "revision": "2767e1b05ef004034a52447d6ae9b334007e5563",
+          "version": null
+        }
+      },
+      {
+        "package": "虎.engine.story",
+        "repositoryURL": "https://github.com/waterdine/hu.engine.story.git",
+        "state": {
+          "branch": "main",
+          "revision": "06769983c48b172043e608bd8f2ba6012dcb60fe",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
