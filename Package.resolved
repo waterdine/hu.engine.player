@@ -5,27 +5,27 @@
         "package": "虎.engine.base",
         "repositoryURL": "https://github.com/waterdine/hu.engine.base.git",
         "state": {
-          "branch": "main",
-          "revision": "d43909853898de2313c347f8058a72dd611248fe",
-          "version": null
+          "branch": null,
+          "revision": "563fb11a6a9a6e8c6e062d411a3882acbd571711",
+          "version": "0.0.3"
         }
       },
       {
         "package": "虎.engine.puzzle",
         "repositoryURL": "https://github.com/waterdine/hu.engine.puzzle.git",
         "state": {
-          "branch": "main",
-          "revision": "2767e1b05ef004034a52447d6ae9b334007e5563",
-          "version": null
+          "branch": null,
+          "revision": "ec3624accb82555644de5622a76e60482d1d4af5",
+          "version": "0.0.3"
         }
       },
       {
         "package": "虎.engine.story",
         "repositoryURL": "https://github.com/waterdine/hu.engine.story.git",
         "state": {
-          "branch": "main",
-          "revision": "06769983c48b172043e608bd8f2ba6012dcb60fe",
-          "version": null
+          "branch": null,
+          "revision": "88565c8c27e300c801ac16e0fa1b1199be3f65e9",
+          "version": "0.0.3"
         }
       }
     ]

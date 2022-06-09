@@ -5,7 +5,7 @@
 //  Created by ito.antonia on 11/02/2021.
 //
 
-#if !os(macOS)
+#if !os(macOS) && !os(tvOS)
 import UIKit
 import SpriteKit
 import 虎_engine_base

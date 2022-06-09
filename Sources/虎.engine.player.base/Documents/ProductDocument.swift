@@ -5,6 +5,8 @@
 //  Created by ito.antonia on 06/03/2022.
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 import 虎_engine_base
 import UniformTypeIdentifiers
@@ -446,3 +448,4 @@ public struct ProductDocument: FileDocument {
         return try fileWrapper()
     }
 }
+#endif
