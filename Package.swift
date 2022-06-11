@@ -10,7 +10,9 @@ import AppleProductTypes
 let package = Package(
     name: "虎.engine.player",
     platforms: [
-        .iOS("14.0")
+        .iOS("14.0"),
+        .macOS("11.0"),
+        .tvOS("11.0")
     ],
     products: [
         .iOSApplication(

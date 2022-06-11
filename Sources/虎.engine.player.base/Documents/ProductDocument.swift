@@ -46,7 +46,7 @@ public struct LanguageDocument: FileDocument {
         let wrapperForStringsDocument = stringsDocumentWrappers["\(name).strings"]
         var strings: [String : String] = [:]
         if (wrapperForStringsDocument != nil && wrapperForStringsDocument!.regularFileContents != nil && wrapperForStringsDocument!.regularFileContents!.count > 0) {
-            strings = try! PropertyListSerialization.propertyList(from: wrapperForStringsDocument!.regularFileContents!, format: nil) as! [String : String]
+            strings = try! PropertyListSerialization.propertyList(from: wrapperForStringsDocument!.regularFileContents!, format: nil) as? [String : String] ?? [:]
         }
         return strings
     }
@@ -54,7 +54,7 @@ public struct LanguageDocument: FileDocument {
     public mutating func setStrings(key: String, name: String, strings: [String : String]) {
         var lines = ""
         for stringPair in strings {
-            lines.append("\"" + stringPair.key + "\" = \"" + stringPair.value + "\";")
+            lines.append("\"" + stringPair.key + "\" = \"" + stringPair.value.replacingOccurrences(of: "\"", with: "\\\"") + "\";\n")
         }
         let wrapperForStringsDocument = stringsDocumentWrappers["\(name).strings"]
         if (wrapperForStringsDocument != nil) {
@@ -164,7 +164,11 @@ public struct ScriptDocument: FileDocument {
         }*/
         let decoder: PropertyListDecoder = PropertyListDecoder()
         decoder.userInfo[SceneListSerialiser().userInfoKey!] = sceneListSerialiser
-        return try! decoder.decode(Scenes.self, from: (scenesWrapper.regularFileContents)!)
+        if (scenesWrapper.regularFileContents == nil) {
+            return Scenes()
+        } else {
+            return try! decoder.decode(Scenes.self, from: (scenesWrapper.regularFileContents)!)
+        }
     }
     
     public mutating func setScenes(key: String, scenes: Scenes, sceneListSerialiser: SceneListSerialiser) {
@@ -182,7 +186,9 @@ public struct ScriptDocument: FileDocument {
         encoder.outputFormat = .xml
         let scenesPlistData = try! encoder.encode(scenes)
         scenesWrapper = FileWrapper(regularFileWithContents: scenesPlistData)
-        self.scenesWrapper.preferredFilename = "Scenes.plist"
+        if (scenesWrapper.filename == nil) {
+            self.scenesWrapper.preferredFilename = "Scenes.plist"
+        }
     }
     
     public func fetchLanguage(name: String) -> LanguageDocument {
@@ -200,6 +206,13 @@ public struct ScriptDocument: FileDocument {
             newWrapperForLanguage.preferredFilename = "\(name).lproj"
         }
         languagesWrapper.addFileWrapper(newWrapperForLanguage)
+    }
+    
+    public func removeLanguage(name: String) {
+        let wrapperForLanguage = languagesWrapper.fileWrappers!["\(name).lproj"]
+        if (wrapperForLanguage != nil) {
+            languagesWrapper.removeFileWrapper(wrapperForLanguage!)
+        }
     }
     
     public func fileWrapper() throws -> FileWrapper {
@@ -262,7 +275,9 @@ public struct StoryDocument: FileDocument {
         encoder.outputFormat = .xml
         let storyPlistData = try! encoder.encode(story)
         storyWrapper = FileWrapper(regularFileWithContents: storyPlistData)
-        storyWrapper.preferredFilename = "Story.plist"
+        if (storyWrapper.filename == nil) {
+            storyWrapper.preferredFilename = "Story.plist"
+        }
     }
     
     public func fetchScript(name: String) -> ScriptDocument {
@@ -282,6 +297,13 @@ public struct StoryDocument: FileDocument {
         scriptsWrapper.addFileWrapper(newWrapperForScript)
     }
     
+    public func removeScript(name: String) {
+        let wrapperForScript = scriptsWrapper.fileWrappers!["\(name).lproj"]
+        if (wrapperForScript != nil) {
+            scriptsWrapper.removeFileWrapper(wrapperForScript!)
+        }
+    }
+    
     public func fetchLanguage(name: String) -> LanguageDocument {
         let wrapperForLanguage = languagesWrapper.fileWrappers!["\(name).lproj"]
         return wrapperForLanguage == nil ? LanguageDocument() : try! LanguageDocument(file: wrapperForLanguage!)
@@ -297,6 +319,13 @@ public struct StoryDocument: FileDocument {
             newWrapperForLanguage.preferredFilename = "\(name).lproj"
         }
         languagesWrapper.addFileWrapper(newWrapperForLanguage)
+    }
+    
+    public func removeLanguage(name: String) {
+        let wrapperForLanguage = languagesWrapper.fileWrappers!["\(name).lproj"]
+        if (wrapperForLanguage != nil) {
+            languagesWrapper.removeFileWrapper(wrapperForLanguage!)
+        }
     }
     
     public func fileWrapper() throws -> FileWrapper {
